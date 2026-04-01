@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Gargee ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #a18cd1, #fbc2eb, #fad0c4);
+  background-size: 400% 400%;
+  animation: bg 10s infinite;
+}
+
+@keyframes bg {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+/* Intro screen */
+#intro {
+  position: absolute;
+  text-align: center;
+  color: white;
+}
+
+#intro button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Card */
+.card {
+  display: none;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 420px;
+  text-align: center;
+  color: white;
+}
+
+.heart {
+  font-size: 30px;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.2);}
+  100% {transform: scale(1);}
+}
+
+/* Floating hearts */
+.heart-bg {
+  position: absolute;
+  bottom: -20px;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  from {transform: translateY(0);}
+  to {transform: translateY(-110vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Intro -->
+<div id="intro">
+  <h2>Hey Gargee 💖</h2>
+  <p>Tap below…</p>
+  <button onclick="openLetter()">Open 💌</button>
+</div>
+
+<!-- Letter -->
+<div class="card" id="card">
+  <div class="heart">💖</div>
+  <h2>Hey Gargee,</h2>
+  <p id="text"></p>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const message = `I don’t know if this is the perfect way to say this...
+
+but I felt like I shouldn’t keep it inside anymore.
+
+I just want you to know…
+
+I still miss you.
+
+It’s the little things — the memories,
+the conversations, and the way everything felt with you.
+
+I’m not expecting anything from this…
+
+I just wanted to be honest about how I feel.
+
+I hope you’re happy, smiling,
+and doing amazing always. ✨`;
+
+let i = 0;
+
+function typeWriter() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeWriter, 35);
+  }
+}
+
+function openLetter() {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("card").style.display = "block";
+  document.getElementById("music").play();
+  typeWriter();
+  createHearts();
+}
+
+function createHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart-bg";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
